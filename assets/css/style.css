@@ -1,8 +1,8 @@
 /* ============================================================
-   PHD Taxi Services — design system
+   PHD Taxi Services - design system
    Heritage-coastal identity: deep teal/slate base, warm copper accent
    (granite + engine-house brick), sand cream background. Deliberately
-   distinct from other Bluewater builds — no shared palette or type pairing.
+   distinct from other Bluewater builds - no shared palette or type pairing.
    ============================================================ */
 
 :root{
@@ -13,6 +13,11 @@
   --cream-dim:#ecdec3;
   --copper:#c1652f;
   --copper-light:#dd8a54;
+  /* Brand copper is 3.55:1 on cream - fine for rules and icons (3:1), too light
+     for text or a button fill. This is the same hue one step darker:
+     5.23:1 on cream, 4.50:1 on cream-dim, 5.98:1 on white, 5.23:1 cream-on-it. */
+  --copper-deep:#985025;
+  --copper-deep-hover:#7f431f;
   --sea:#3f8f89;
   --sea-light:#6db3ad;
   --ink-rgb:18,38,42;
@@ -34,7 +39,7 @@
 }
 
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 16px)}
 body{
   margin:0;
   font-family:var(--font-body);
@@ -42,9 +47,12 @@ body{
   background:var(--cream);
   -webkit-font-smoothing:antialiased;
   line-height:1.62;
-  overflow-x:hidden;
+  overflow-x:clip;
 }
-img{max-width:100%;display:block}
+html{overflow-x:clip}
+/* height:auto stops the width/height attributes stretching an image once
+   max-width narrows it */
+img{max-width:100%;height:auto;display:block}
 a{color:inherit;text-decoration:none}
 ul{list-style:none;margin:0;padding:0}
 h1,h2,h3,h4{font-family:var(--font-display);line-height:1.1;margin:0 0 .5em;font-weight:600;letter-spacing:0}
@@ -52,7 +60,7 @@ p{margin:0 0 1em}
 .container{max-width:var(--container);margin-inline:auto;padding-inline:24px}
 section{padding:clamp(56px,9vw,110px) 0}
 
-/* svg icons are sized explicitly everywhere they're used — never left to
+/* svg icons are sized explicitly everywhere they're used - never left to
    the browser's 300x150 replaced-element default. */
 svg{display:block}
 
@@ -64,7 +72,7 @@ svg{display:block}
 .eyebrow{
   display:inline-flex;align-items:center;gap:9px;
   font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--copper);font-weight:600;margin-bottom:14px;font-family:var(--font-body);
+  color:var(--copper-deep);font-weight:600;margin-bottom:14px;font-family:var(--font-body);
 }
 .eyebrow::before{content:"";width:26px;height:1px;background:var(--copper);display:inline-block}
 
@@ -77,13 +85,14 @@ svg{display:block}
 }
 .btn svg{width:18px;height:18px;flex:none}
 .btn:active{transform:scale(.97)}
-.btn-primary{background:var(--copper);color:var(--cream);box-shadow:0 10px 24px rgba(var(--copper-rgb),.32)}
-.btn-primary:hover{background:var(--copper-light);transform:translateY(-2px);box-shadow:0 16px 32px rgba(var(--copper-rgb),.4)}
+.btn-primary{background:var(--copper-deep);color:var(--cream);box-shadow:0 10px 24px rgba(var(--copper-rgb),.32)}
+.btn-primary:hover{background:var(--copper-deep-hover);transform:translateY(-2px);box-shadow:0 16px 32px rgba(var(--copper-rgb),.4)}
 .btn-ghost{background:transparent;border-color:rgba(246,239,226,.4);color:var(--cream)}
 .btn-ghost:hover{background:rgba(246,239,226,.12);transform:translateY(-2px)}
 .btn-dark{background:var(--ink);color:var(--cream)}
 .btn-dark:hover{background:var(--ink-3);transform:translateY(-2px)}
 .btn-block{width:100%}
+@media (max-width:520px){.btn{white-space:normal;text-align:center}}
 
 /* -------- top nav -------- */
 .nav{
@@ -96,7 +105,8 @@ svg{display:block}
 .brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:600;font-size:1.35rem;color:var(--cream)}
 .brand .logo-icon{width:30px;height:30px;color:var(--copper-light);flex:none}
 .brand small{display:block;font-family:var(--font-body);font-weight:500;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sea-light)}
-.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links{display:flex;align-items:center;gap:clamp(16px,1.8vw,28px)}
+.brand,.nav-links a,.nav-call,.nav-cta .btn{white-space:nowrap}
 .nav-links a{color:var(--cream);font-size:.92rem;font-weight:500;opacity:.86;position:relative;padding:6px 0}
 .nav-links a:hover{opacity:1}
 .nav-links a.active{opacity:1;color:var(--copper-light)}
@@ -106,7 +116,11 @@ svg{display:block}
 .nav-toggle{display:none;background:none;border:none;color:var(--cream);cursor:pointer;padding:8px}
 .nav-toggle svg{width:26px;height:26px}
 
-@media (max-width:940px){
+/* seven links + phone + WhatsApp only fit on one line from ~1320px; below that
+   drop the phone number (it is in the sticky bar, hero and footer), and switch
+   to the menu before the links start wrapping. */
+@media (max-width:1320px){.nav-call{display:none}}
+@media (max-width:1120px){
   .nav-links{
     position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;
     background:var(--ink);flex-direction:column;justify-content:flex-start;
@@ -176,7 +190,7 @@ svg{display:block}
 .card .icon svg{width:24px;height:24px}
 .card h3{margin-bottom:10px;font-size:1.25rem}
 .card p{color:var(--ink-2);font-size:.96rem;margin-bottom:0}
-.card a.card-link,a.card-link{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-weight:600;font-size:.9rem;color:var(--copper)}
+.card a.card-link,a.card-link{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-weight:600;font-size:.9rem;color:var(--copper-deep);min-height:24px}
 .card-link svg{width:16px;height:16px;flex:none}
 
 .icon svg{width:24px;height:24px;flex:none}
@@ -203,6 +217,9 @@ svg{display:block}
 
 /* -------- split -------- */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,80px);align-items:center}
+/* grid items default to min-width:auto, so a wide image or long heading forces
+   its 1fr column past the viewport on phones. */
+.split > *,.grid > *{min-width:0}
 @media (max-width:880px){.split{grid-template-columns:1fr}}
 .split.reverse .split-media{order:2}
 .split-media{position:relative}
@@ -215,6 +232,9 @@ svg{display:block}
 .split-media .float-card .icon{width:42px;height:42px;border-radius:8px;background:var(--ink);color:var(--copper-light);display:flex;align-items:center;justify-content:center;flex:none}
 .split-media .float-card .icon svg{width:21px;height:21px}
 .split-media .float-card strong{display:block;font-size:.95rem}
+/* the float card is always white, so it must not inherit cream text from a dark band */
+.float-card{color:var(--ink)}
+.band-dark .float-card strong{color:var(--ink)}
 .split-media .float-card span{font-size:.8rem;color:var(--ink-2)}
 
 .section-head{max-width:700px;margin-bottom:48px}
@@ -244,25 +264,32 @@ svg{display:block}
 @media (max-width:800px){.steps{grid-template-columns:1fr}}
 .step .num{
   counter-increment:step;width:44px;height:44px;border-radius:50%;
-  background:var(--copper);color:var(--cream);display:flex;align-items:center;justify-content:center;
+  background:var(--copper-deep);color:var(--cream);display:flex;align-items:center;justify-content:center;
   font-family:var(--font-display);font-weight:700;font-size:1.15rem;margin-bottom:16px;
 }
 .step .num::before{content:counter(step)}
 
 .faq-item{border-bottom:1px solid rgba(18,38,42,.1);padding:22px 0}
-.faq-q{display:flex;align-items:center;justify-content:space-between;gap:20px;cursor:pointer;font-weight:600;font-size:1.05rem;font-family:var(--font-display)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:20px;cursor:pointer;font-weight:600;font-size:1.05rem;font-family:var(--font-display);
+  width:100%;background:none;border:0;padding:0;margin:0;color:inherit;text-align:left;line-height:1.35}
 .faq-q .chev{display:inline-flex;width:22px;height:22px;flex:none;transition:transform .3s ease;color:var(--copper)}
 .faq-q .chev svg{width:22px;height:22px}
 .faq-item.open .faq-q .chev{transform:rotate(45deg)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+/* visibility (not just max-height) keeps closed answers out of the accessibility
+   tree; the delayed visibility transition lets the collapse animate first. */
+.faq-a{max-height:0;overflow:hidden;visibility:hidden;transition:max-height .35s ease,visibility 0s linear .35s}
 .faq-a p{padding-top:14px;color:var(--ink-2)}
-.faq-item.open .faq-a{max-height:600px}
+.faq-item.open .faq-a{max-height:900px;visibility:visible;transition:max-height .35s ease,visibility 0s}
+.band-dark .faq-q .chev{color:var(--copper-light)}
+.band-dark .faq-a p{color:rgba(246,239,226,.85)}
 
 .price-table{width:100%;border-collapse:collapse;background:#fff;border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm)}
 .price-table th,.price-table td{padding:16px 20px;text-align:left;border-bottom:1px solid rgba(18,38,42,.08)}
 .price-table th{background:var(--ink);color:var(--cream);font-family:var(--font-body);font-weight:600;font-size:.85rem;text-transform:uppercase;letter-spacing:.04em}
-.price-table td.amount{font-family:var(--font-display);font-size:1.15rem;font-weight:600;color:var(--copper)}
+.price-table td.amount{font-family:var(--font-display);font-size:1.15rem;font-weight:600;color:var(--copper-deep)}
 .price-table tr:last-child td{border-bottom:none}
+.price-table td.amount,.price-table th{white-space:nowrap}
+@media (max-width:520px){.price-table th,.price-table td{padding:14px 14px}}
 .price-table tr:hover td{background:var(--cream-dim)}
 .price-note{font-size:.88rem;color:var(--ink-2);margin-top:14px}
 
@@ -287,7 +314,10 @@ svg{display:block}
   background:var(--ink);padding:12px 16px;box-shadow:0 -6px 24px rgba(0,0,0,.25);gap:10px;
 }
 .sticky-cta a{flex:1}
-@media (max-width:720px){.sticky-cta{display:flex} body{padding-bottom:74px}}
+@media (max-width:720px){.sticky-cta{display:flex} body{padding-bottom:74px}
+  /* the sticky bar carries WhatsApp on phones; in the header it covered the
+     tagline and pushed the menu button off-screen at 375px */
+  .nav-cta .btn{display:none}}
 
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
@@ -307,10 +337,11 @@ svg{display:block}
 }
 
 .center{text-align:center}
-.text-copper{color:var(--copper)}
+.text-copper{color:var(--copper-deep)}
+.band-dark .text-copper,.hero .text-copper,.page-hero .text-copper,.cta-band .text-copper{color:var(--copper-light)}
 .text-cream-dim{color:rgba(246,239,226,.75)}
 .divider{width:60px;height:2px;background:var(--copper);margin:18px auto}
-.skip-link{position:absolute;left:-999px;top:0;background:var(--copper);color:var(--cream);padding:10px 16px;z-index:200;font-weight:700}
+.skip-link{position:absolute;left:-999px;top:0;background:var(--copper-deep);color:var(--cream);padding:10px 16px;z-index:200;font-weight:700}
 .skip-link:focus{left:16px;top:16px}
 .form-field{margin-bottom:18px}
 .form-field label{display:block;font-weight:600;font-size:.88rem;margin-bottom:6px}
@@ -318,6 +349,21 @@ svg{display:block}
   width:100%;padding:13px 16px;border-radius:4px;border:1px solid rgba(18,38,42,.18);
   font-family:var(--font-body);font-size:.96rem;background:#fff;
 }
-.form-field input:focus,.form-field select:focus,.form-field textarea:focus{outline:2px solid var(--copper);outline-offset:1px}
+.form-field input:focus-visible,.form-field select:focus-visible,.form-field textarea:focus-visible{outline:3px solid var(--copper-deep);outline-offset:1px}
+.form-field input[aria-invalid=true],.form-field textarea[aria-invalid=true]{border-color:#a3261b}
+.field-error{display:block;margin-top:6px;font-size:.85rem;font-weight:600;color:#a3261b}
+.field-error[hidden]{display:none}
+
+/* -------- focus: visible on every surface -------- */
+:focus-visible{outline:3px solid var(--copper-deep);outline-offset:2px}
+.hero :focus-visible,.page-hero :focus-visible,.band-dark :focus-visible,.cta-band :focus-visible,
+.nav :focus-visible,.sticky-cta :focus-visible,.footer :focus-visible{outline-color:var(--copper-light)}
+
+/* eyebrow on dark surfaces needs the light copper (5.86:1 on ink) */
+.hero .eyebrow,.page-hero .eyebrow,.band-dark .eyebrow,.cta-band .eyebrow{color:var(--copper-light)}
+.hero .eyebrow::before,.page-hero .eyebrow::before,.band-dark .eyebrow::before,.cta-band .eyebrow::before{background:var(--copper-light)}
+
+/* footer links: 24px minimum target (WCAG 2.5.8) */
+.footer li a{display:inline-block;min-height:24px;padding:2px 0}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 @media (max-width:560px){.two-col{grid-template-columns:1fr}}

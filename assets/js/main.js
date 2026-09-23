@@ -1,4 +1,4 @@
-// ZensCars Newquay — interactions
+// PHD Taxi Services - interactions
 (function(){
   "use strict";
 
@@ -15,16 +15,40 @@
   var toggle = document.querySelector('.nav-toggle');
   var links = document.querySelector('.nav-links');
   if(toggle && links){
-    toggle.addEventListener('click', function(){
-      var open = links.classList.toggle('open');
+    var setMenu = function(open, returnFocus){
+      links.classList.toggle('open', open);
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
       document.body.style.overflow = open ? 'hidden' : '';
+      if(open){
+        var first = links.querySelector('a');
+        if(first) first.focus();
+      } else if(returnFocus){
+        toggle.focus();
+      }
+    };
+
+    toggle.addEventListener('click', function(){
+      setMenu(!links.classList.contains('open'), true);
     });
+
     links.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){
-        links.classList.remove('open');
-        document.body.style.overflow = '';
-      });
+      a.addEventListener('click', function(){ setMenu(false, false); });
+    });
+
+    // Escape closes the panel and hands focus back to the button.
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && links.classList.contains('open')) setMenu(false, true);
+    });
+
+    // Keep Tab inside the open panel - otherwise focus walks into the page
+    // behind it, which is invisible to a keyboard user.
+    links.addEventListener('keydown', function(e){
+      if(e.key !== 'Tab' || !links.classList.contains('open')) return;
+      var items = [toggle].concat(Array.prototype.slice.call(links.querySelectorAll('a')));
+      var first = items[0], last = items[items.length - 1];
+      if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
     });
   }
 
@@ -45,8 +69,15 @@
   }
 
   // Animated stat counters
+  // The CSS media query kills transitions, but this counter is scripted motion
+  // and has to opt out on its own.
+  var noMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var counters = document.querySelectorAll('[data-count]');
-  if(counters.length && 'IntersectionObserver' in window){
+  if(counters.length && noMotion){
+    counters.forEach(function(el){
+      el.textContent = el.getAttribute('data-count') + (el.getAttribute('data-suffix') || '');
+    });
+  } else if(counters.length && 'IntersectionObserver' in window){
     var cio = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if(!entry.isIntersecting) return;
@@ -76,16 +107,50 @@
     if(!q) return;
     q.addEventListener('click', function(){
       var wasOpen = item.classList.contains('open');
-      item.closest('.faq-list').querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
-      if(!wasOpen) item.classList.add('open');
+      item.closest('.faq-list').querySelectorAll('.faq-item').forEach(function(i){
+        i.classList.remove('open');
+        var qq = i.querySelector('.faq-q');
+        if(qq) qq.setAttribute('aria-expanded', 'false');
+      });
+      if(!wasOpen){
+        item.classList.add('open');
+        q.setAttribute('aria-expanded', 'true');
+      }
     });
   });
 
-  // Contact form (static demo — wires up to mailto/WhatsApp until a form backend is connected)
+  // Contact form - composes a pre-filled WhatsApp message via a wa.me deep link.
   var form = document.getElementById('bookingForm');
   if(form){
+    // The form carries `novalidate`, which switches off the browser's own
+    // enforcement of the `required` attributes. Without this check an empty
+    // submit still fired and PHD received a WhatsApp with every field blank.
+    var setError = function(field, show){
+      var err = document.getElementById('err-' + field.id);
+      if(err) err.hidden = !show;
+      field.setAttribute('aria-invalid', show ? 'true' : 'false');
+    };
+
+    form.querySelectorAll('[required]').forEach(function(field){
+      field.addEventListener('input', function(){
+        if(field.value.trim()) setError(field, false);
+      });
+    });
+
     form.addEventListener('submit', function(e){
       e.preventDefault();
+
+      var invalid = [];
+      form.querySelectorAll('[required]').forEach(function(field){
+        var empty = !field.value.trim();
+        setError(field, empty);
+        if(empty) invalid.push(field);
+      });
+      if(invalid.length){
+        invalid[0].focus();   // land the user on the first thing to fix
+        return;
+      }
+
       var data = new FormData(form);
       var name = data.get('name') || '';
       var pickup = data.get('pickup') || '';
