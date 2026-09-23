@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="160 140 760 760" role="img" aria-labelledby="t">
+  <title id="t">PHD Taxi Services, 07494 073111</title>
+  <!-- Full badge, redrawn from PHD's logo. Cream on transparent, for dark surfaces. -->
+  <defs>
+    <mask id="back" maskUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1080">
+      <rect width="1080" height="1080" fill="#fff"/>
+      <polygon points="535,295 319,667 750,667" fill="#000" stroke="#000" stroke-width="34"/>
+    </mask>
+    <mask id="front" maskUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1080">
+      <rect width="1080" height="1080" fill="#fff"/>
+      <text x="535" y="606" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="100" fill="#000">PHD</text>
+    </mask>
+  </defs>
+  <g fill="none" stroke="#f6efe2">
+    <circle cx="540" cy="508" r="356" stroke-width="20"/>
+    <g stroke-width="16" mask="url(#back)">
+      <polygon points="441,280 272,573 610,573"/>
+      <polygon points="636,264 450,586 822,586"/>
+    </g>
+  </g>
+  <polygon points="535,295 319,667 750,667" fill="#f6efe2" mask="url(#front)"/>
+  <g fill="#f6efe2" font-family="Arial, Helvetica, sans-serif" text-anchor="middle">
+    <text x="540" y="726" font-size="46" letter-spacing="2">TAXI SERVICES</text>
+    <text x="533" y="795" font-size="33" letter-spacing="1">07494 073111</text>
+  </g>
+</svg>

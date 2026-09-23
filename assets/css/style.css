@@ -104,7 +104,7 @@ svg{display:block}
 .nav.solid{background:rgba(18,38,42,.93);backdrop-filter:blur(10px);box-shadow:0 4px 20px rgba(0,0,0,.18)}
 .nav .container{display:flex;align-items:center;justify-content:space-between;width:100%}
 .brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:600;font-size:1.35rem;color:var(--cream)}
-.brand .logo-icon{width:30px;height:30px;color:var(--copper-light);flex:none}
+.brand .logo-icon{width:36px;height:30px;color:var(--copper-light);flex:none}
 .brand small{display:block;font-family:var(--font-body);font-weight:500;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sea-light)}
 .nav-links{display:flex;align-items:center;gap:clamp(16px,1.8vw,28px)}
 .brand,.nav-links a,.nav-call,.nav-cta .btn{white-space:nowrap}
@@ -310,6 +310,8 @@ svg{display:block}
 @media (max-width:520px){.footer .grid{grid-template-columns:1fr}}
 .footer h4,.footer .footer-h{color:var(--cream);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px;font-family:var(--font-body);font-weight:700}
 .footer li{margin-bottom:10px}
+.footer-badge{display:inline-block;margin-bottom:18px}
+.footer-badge img{width:120px;height:120px}
 .footer a:hover{color:var(--copper-light)}
 .footer-bottom{
   border-top:1px solid rgba(246,239,226,.12);margin-top:56px;padding-top:26px;

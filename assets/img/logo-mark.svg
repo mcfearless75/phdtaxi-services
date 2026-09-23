@@ -1,4 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 60" fill="none" role="img" aria-labelledby="phdLogoTitle">
-  <title id="phdLogoTitle">PHD Taxi Services peaks mark</title>
-  <path d="M6 46 L24 14 L34 32 L40 22 L58 46 Z" stroke="#dd8a54" stroke-width="4.2" stroke-linejoin="round" stroke-linecap="round" fill="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="250 240 600 440" role="img" aria-labelledby="t">
+  <title id="t">PHD Taxi Services</title>
+  <!-- Redrawn from PHD's badge: two outlined peaks behind one solid peak.
+       The mask cuts the back outlines where they pass behind the front peak. -->
+  <defs>
+    <mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1080">
+      <rect width="1080" height="1080" fill="#fff"/>
+      <polygon points="535,295 319,667 750,667" fill="#000" stroke="#000" stroke-width="44" stroke-linejoin="miter"/>
+    </mask>
+  </defs>
+  <g fill="none" stroke="#dd8a54" stroke-width="26" stroke-linejoin="miter" mask="url(#m)">
+    <polygon points="441,280 272,573 610,573"/>
+    <polygon points="636,264 450,586 822,586"/>
+  </g>
+  <polygon points="535,295 319,667 750,667" fill="#dd8a54"/>
 </svg>
