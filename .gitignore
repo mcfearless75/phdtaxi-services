@@ -1,0 +1,11 @@
+.DS_Store
+Thumbs.db
+*.log
+NOTES.local.md
+
+# agent scaffolding - not part of the deployed site
+.claude/
+.agents/
+.swarm/
+.claude-flow/
+CLAUDE.md
