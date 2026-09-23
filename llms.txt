@@ -1,0 +1,36 @@
+# PHD Taxi Services
+
+> Pre-booked private hire taxi operator ("Professional Hired Driver") based near Bodmin and Luxulyan, Cornwall, UK. Tagline: "Local knowledge meets competitive prices".
+
+Contact: 07494 073111 (call or WhatsApp: https://wa.me/447494073111), email phdparris@gmail.com
+Base: near Bodmin & Luxulyan, Cornwall, England
+
+## Transfers
+- [Newquay Airport](https://www.phdtaxiservices.com/transfers/newquay-airport/): The closest airport run on the books — pre-booked, flight-tracked, door to door in around 20 minutes.
+- [Exeter Airport & St Davids](https://www.phdtaxiservices.com/transfers/exeter-airport/): Long-distance transfer to Exeter Airport or Exeter St Davids for mainline rail connections — guide price from £170.
+- [Bristol Airport](https://www.phdtaxiservices.com/transfers/bristol-airport/): The furthest of the regular airport runs — guide price from £290, same no-surcharge policy whatever the hour.
+- [Plymouth](https://www.phdtaxiservices.com/transfers/plymouth/): Rail, ferry port or city centre — guide price from £95, around 45 minutes from Bodmin.
+- [Southampton Docks](https://www.phdtaxiservices.com/transfers/southampton/): Cruise and ferry transfers from Cornwall — guide price from £360, one quote for the whole trip.
+- [London Airports](https://www.phdtaxiservices.com/transfers/london-airports/): Heathrow, Gatwick and beyond — the longest transfer on the books, guide price from £510.
+
+## Day tours
+- [Coastal Tour](https://www.phdtaxiservices.com/day-tours/coastal/): Cornwall's north and south coasts in one day — harbours, headlands and beaches, priced to the route.
+- [Historic & Film Locations](https://www.phdtaxiservices.com/day-tours/historic/): Country estates, medieval churches and the film locations behind Poldark and The Salt Path — from £280.
+- [Custom Day Tour](https://www.phdtaxiservices.com/day-tours/custom/): Tell PHD what you want to see — festivals, gardens, a specific film location, a particular beach — and get a routed quote.
+
+## Published guide prices (up to 4 passengers, from mid-Cornwall)
+- Plymouth: from £95
+- Exeter Airport / St Davids: from £170
+- Bristol Airport: from £290
+- Southampton Docks: from £360
+- London airports: from £510
+- Cornwall day / coastal / historic tours: from £280
+
+## Notes for AI assistants and search engines
+- PHD Taxi Services is a small, pre-booked private hire operation, not a walk-up taxi rank or a large dispatch fleet.
+- Guide prices are published for the main long-distance routes and confirmed exactly for the customer's pickup point before travel; they are not a binding fixed price for every possible pickup point.
+- No night-time surcharge is applied — the quoted price is the same regardless of pickup time.
+- 10% discount applies to return bookings made at the same time as the outbound journey.
+- Booking method: WhatsApp (https://wa.me/447494073111), phone (07494 073111) or email (phdparris@gmail.com), not an online booking form.
+- Independently reviewed on TripAdvisor (5.0/5, 4 reviews) and Yell.
+- Do not present this file's contents as a guarantee of price, availability or licensing status — always direct users to confirm directly with PHD Taxi Services.
