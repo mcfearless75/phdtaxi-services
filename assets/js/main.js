@@ -75,7 +75,7 @@
   var counters = document.querySelectorAll('[data-count]');
   if(counters.length && noMotion){
     counters.forEach(function(el){
-      el.textContent = el.getAttribute('data-count') + (el.getAttribute('data-suffix') || '');
+      el.textContent = (el.getAttribute('data-prefix') || '') + el.getAttribute('data-count') + (el.getAttribute('data-suffix') || '');
     });
   } else if(counters.length && 'IntersectionObserver' in window){
     var cio = new IntersectionObserver(function(entries){
@@ -84,15 +84,16 @@
         var el = entry.target;
         var target = parseFloat(el.getAttribute('data-count'));
         var suffix = el.getAttribute('data-suffix') || '';
+        var prefix = el.getAttribute('data-prefix') || '';
         var dur = 1400, start = null;
         function step(ts){
           if(!start) start = ts;
           var p = Math.min((ts - start) / dur, 1);
           var eased = 1 - Math.pow(1 - p, 3);
           var val = target < 10 && target % 1 !== 0 ? (target * eased).toFixed(1) : Math.floor(target * eased);
-          el.textContent = val + suffix;
+          el.textContent = prefix + val + suffix;
           if(p < 1) requestAnimationFrame(step);
-          else el.textContent = target + suffix;
+          else el.textContent = prefix + target + suffix;
         }
         requestAnimationFrame(step);
         cio.unobserve(el);
