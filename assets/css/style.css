@@ -144,7 +144,10 @@ svg{display:block}
   content:"";position:absolute;inset:0;
   background:linear-gradient(180deg,rgba(18,38,42,.8) 0%,rgba(18,38,42,.5) 40%,rgba(18,38,42,.93) 100%);
 }
-.hero-content{position:relative;z-index:1;padding:60px 0 96px}
+/* padding-block, not the shorthand: this element is also .container, and
+   "padding:60px 0 96px" zeroed its side padding, putting the hero text
+   against the screen edge on phones */
+.hero-content{position:relative;z-index:1;padding-block:60px 96px}
 .hero-badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
 .badge{
   display:flex;align-items:center;gap:8px;padding:9px 16px;border-radius:3px;
