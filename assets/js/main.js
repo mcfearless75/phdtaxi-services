@@ -120,12 +120,18 @@
     });
   });
 
-  // Contact form - composes a pre-filled WhatsApp message via a wa.me deep link.
-  var form = document.getElementById('bookingForm');
-  if(form){
-    // The form carries `novalidate`, which switches off the browser's own
-    // enforcement of the `required` attributes. Without this check an empty
-    // submit still fired and PHD received a WhatsApp with every field blank.
+  // Booking forms - compose a pre-filled WhatsApp message via a wa.me deep link.
+  // #bookingForm is the full form on /contact/; .wa-form is the quick-quote form
+  // on the homepage and every route and tour page (route pre-filled).
+  var WA_NUMBER = '447494073111';
+  var FIELDS = [
+    ['name', 'Name'], ['pickup', 'Pickup'], ['dropoff', 'Drop-off'], ['tour', 'Tour'],
+    ['when', 'Date/time'], ['passengers', 'Passengers'], ['luggage', 'Luggage'], ['notes', 'Notes']
+  ];
+  var wireForm = function(form){
+    // The forms carry `novalidate`, which switches off the browser's own
+    // enforcement of `required`. Without this check an empty submit still
+    // fired and PHD received a WhatsApp with every field blank.
     var setError = function(field, show){
       var err = document.getElementById('err-' + field.id);
       if(err) err.hidden = !show;
@@ -153,20 +159,18 @@
       }
 
       var data = new FormData(form);
-      var name = data.get('name') || '';
-      var pickup = data.get('pickup') || '';
-      var dropoff = data.get('dropoff') || '';
-      var when = data.get('when') || '';
-      var notes = data.get('notes') || '';
-      var msg = 'Hi, booking enquiry from the PHD Taxi Services website:%0A' +
-        'Name: ' + encodeURIComponent(name) + '%0A' +
-        'Pickup: ' + encodeURIComponent(pickup) + '%0A' +
-        'Drop-off: ' + encodeURIComponent(dropoff) + '%0A' +
-        'Date/time: ' + encodeURIComponent(when) + '%0A' +
-        'Notes: ' + encodeURIComponent(notes);
-      window.location.href = 'https://wa.me/447494073111?text=' + msg;
+      var context = form.getAttribute('data-context');
+      var lines = ['Hi Roger, booking enquiry from the PHD Taxi Services website' + (context ? ' (' + context + ')' : '') + ':'];
+      FIELDS.forEach(function(f){
+        var v = data.get(f[0]);
+        if(v !== null && String(v).trim()) lines.push(f[1] + ': ' + String(v).trim());
+      });
+      window.location.href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(lines.join('\n'));
     });
-  }
+  };
+  var booking = document.getElementById('bookingForm');
+  if(booking) wireForm(booking);
+  document.querySelectorAll('form.wa-form').forEach(wireForm);
 
   // Current year in footer
   document.querySelectorAll('[data-year]').forEach(function(el){

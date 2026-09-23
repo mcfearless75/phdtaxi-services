@@ -379,4 +379,15 @@ svg{display:block}
 /* footer links: 24px minimum target (WCAG 2.5.8) */
 .footer li a{display:inline-block;min-height:24px;padding:2px 0}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.two-col > *{min-width:0}
+.two-col{margin-bottom:18px}
+.two-col > .form-field{margin-bottom:0}
+
+/* -------- quick-quote WhatsApp form -------- */
+.quote-band{background:var(--cream-dim)}
+.quote-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(28px,5vw,64px);align-items:start}
+.quote-wrap > *{min-width:0}
+@media (max-width:880px){.quote-wrap{grid-template-columns:1fr}}
+.wa-form{background:#fff;border-radius:var(--radius-lg);padding:clamp(22px,4vw,34px);box-shadow:var(--shadow-sm);border:1px solid rgba(18,38,42,.07)}
+.form-field select{appearance:auto}
 @media (max-width:560px){.two-col{grid-template-columns:1fr}}
