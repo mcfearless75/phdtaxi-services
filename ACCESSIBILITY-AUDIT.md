@@ -90,6 +90,12 @@ buttons at ≤520px. `overflow-x:hidden` on `body` replaced by `overflow-x:clip`
 `img` had `max-width:100%` but no `height:auto`, so any image narrowed by its container kept
 its `height` attribute and distorted (the same bug as ZensCars 11b). Added `height:auto`.
 
+> **Palette update (Oct 2026):** the site moved to Cornish racing green and brass.
+> The same token structure carries over and every pair was re-checked: deep brass
+> `#76561f` is 6.02:1 on ivory, 5.21:1 on ivory-dim, 6.73:1 on white and 6.02:1 with
+> ivory text on it; light brass `#d2ae74` is 7.62:1 on the green ink. A full axe re-run
+> found 0 violations across all 36 page/viewport combinations.
+
 ## MEDIUM
 
 ### 11. ~~Desktop nav wrapped onto two lines between 941px and ~1300px~~ - FIXED
