@@ -8,9 +8,9 @@
       <polygon points="535,295 319,667 750,667" fill="#000" stroke="#000" stroke-width="44" stroke-linejoin="miter"/>
     </mask>
   </defs>
-  <g fill="none" stroke="#d2ae74" stroke-width="26" stroke-linejoin="miter" mask="url(#m)">
+  <g fill="none" stroke="#5ee34a" stroke-width="26" stroke-linejoin="miter" mask="url(#m)">
     <polygon points="441,280 272,573 610,573"/>
     <polygon points="636,264 450,586 822,586"/>
   </g>
-  <polygon points="535,295 319,667 750,667" fill="#d2ae74"/>
+  <polygon points="535,295 319,667 750,667" fill="#5ee34a"/>
 </svg>
